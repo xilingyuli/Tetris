@@ -34,7 +34,7 @@ public class DoubleGameFrame extends GameFrame{
 	OutputStream out;
 	Robot robot;
 	DoubleGameFrame(String ip,int sp,int rp)
-	{
+	throws Exception{
 		super();
 		sendIP = ip;
 		sendPort = sp;
@@ -188,7 +188,12 @@ public class DoubleGameFrame extends GameFrame{
 	@Override
 	protected int updateData()
 	{
-		int i = super.updateData();
+		int i = 0;
+		try {
+			i = super.updateData();
+		}catch (Exception e1){
+			e1.printStackTrace();
+		}
 		if(i>1)
 			try {
 				out.write(i-1);
@@ -202,7 +207,11 @@ public class DoubleGameFrame extends GameFrame{
 	@Override
 	protected void resetGame()
 	{
-		super.resetGame();
+		try {
+			super.resetGame();
+		}catch (Exception e1){
+			e1.printStackTrace();
+		}
 		this.sendThread.start();
 		this.receiveThread.start();
 		this.sendDataThread.start();

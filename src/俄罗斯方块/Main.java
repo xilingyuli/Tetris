@@ -1,6 +1,7 @@
 package 俄罗斯方块;
 
 import java.awt.EventQueue;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
@@ -24,27 +25,38 @@ public class Main {
 	 * 7.双人模式下可看到对方战况，可通过自己消去多行为对方增长行数，有一方失败时游戏结束，并通知双方成功或失败
 	 * 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException,ClassNotFoundException {
 		// TODO Auto-generated method stub
 		EventQueue.invokeLater(new Runnable()
 		{
 			public void run()
 			{
-				Object[] options ={ "单人", "双人" };  
-				int m = JOptionPane.showOptionDialog(null, "请选择游戏模式", "俄罗斯方块",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);  
+				Object[] options ={ "单人", "双人" };
+				int m = JOptionPane.showOptionDialog(null, "请选择游戏模式", "俄罗斯方块",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 				if(m==0)
-					singleGame();
-				else if(m==1)
-					doubleGame();
-				
+				{
+					try {
+						singleGame();
+					}catch (Exception e1){
+						e1.printStackTrace();
+					}
+				}
+				else if(m==1){
+					try {
+						doubleGame();
+					}catch (Exception e1){
+						e1.printStackTrace();
+					}
+				}
+
 			}
 			private void singleGame()
-			{
+			throws Exception{
 				GameFrame player = new GameFrame();
 				player.setVisible(true);
 			}
 			private void doubleGame()
-			{
+			throws Exception{
 				DoubleGameFrame player1 = new DoubleGameFrame("192.168.17.185",5000,4000);
 				player1.setVisible(true);
 			}
