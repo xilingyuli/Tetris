@@ -68,7 +68,7 @@ public class Main {
 
 			private void Ranking()throws Exception{  //构造排行面板
 				RankingView rank = new RankingView();
-				rank.Op();
+				rank.setVisible(true);
             }
 		});
 	}
