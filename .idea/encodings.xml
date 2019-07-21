@@ -7,9 +7,11 @@
     <file url="file://$PROJECT_DIR$/src/俄罗斯方块/GameFrame.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/俄罗斯方块/GameView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/俄罗斯方块/Main.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/俄罗斯方块/RankingView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/俄罗斯方块/Test.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/俄罗斯方块/Unit.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/俄罗斯方块/UnitKey.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/俄罗斯方块/WatchView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/俄罗斯方块/d.java" charset="GBK" />
   </component>
 </project>

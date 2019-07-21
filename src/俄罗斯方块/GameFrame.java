@@ -106,6 +106,9 @@ public class GameFrame extends JFrame{
 		JOptionPane.showMessageDialog(null, "你的最终得分是："+watch.score, "俄罗斯方块", JOptionPane.ERROR_MESSAGE);
 		String inputval = JOptionPane.showInputDialog("请输入你的昵称:");
 		GameFrame.StoreData(inputval,watch.score);
+		this.setVisible(false);
+		String a[] = null;
+		Main.main(a);
 	}
 
 	//连接数据库的方法

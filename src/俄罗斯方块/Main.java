@@ -31,35 +31,45 @@ public class Main {
 		{
 			public void run()
 			{
-				Object[] options ={ "单人", "双人" };
-				int m = JOptionPane.showOptionDialog(null, "请选择游戏模式", "俄罗斯方块",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+				Object[] options ={ "单人", "双人","排行榜"};
+				int m = JOptionPane.showOptionDialog(null, "请选择游戏模式", "俄罗斯方块",JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "单人");
 				if(m==0)
 				{
-					try {
+					try { //选择单人模式
 						singleGame();
 					}catch (Exception e1){
 						e1.printStackTrace();
 					}
 				}
-				else if(m==1){
+				else if(m==1){ //选择双人模式
 					try {
 						doubleGame();
 					}catch (Exception e1){
 						e1.printStackTrace();
 					}
 				}
+				else if(m==2){ //进入排行查看
+					try {
+						Ranking();
+					}catch (Exception e1){
+						e1.printStackTrace();
+					}
+                }
 
 			}
-			private void singleGame()
-			throws Exception{
+			private void singleGame() throws Exception{  //构造单人游戏界面面板
 				GameFrame player = new GameFrame();
 				player.setVisible(true);
 			}
-			private void doubleGame()
-			throws Exception{
+			private void doubleGame() throws Exception{ //构造双人游戏界面面板
 				DoubleGameFrame player1 = new DoubleGameFrame("192.168.17.185",5000,4000);
 				player1.setVisible(true);
 			}
+
+			private void Ranking()throws Exception{  //构造排行面板
+				RankingView rank = new RankingView();
+				rank.Op();
+            }
 		});
 	}
 
