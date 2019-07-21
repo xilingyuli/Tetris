@@ -1,4 +1,4 @@
-package 俄罗斯方块;
+package Tetris;
 
 import java.awt.EventQueue;
 import java.sql.SQLException;
@@ -32,7 +32,7 @@ public class Main {
 			public void run()
 			{
 				Object[] options ={ "单人", "双人","排行榜"};
-				int m = JOptionPane.showOptionDialog(null, "请选择游戏模式", "俄罗斯方块",JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "单人");
+				int m = JOptionPane.showOptionDialog(null, "请选择游戏模式", "Tetris",JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "单人");
 				if(m==0)
 				{
 					try { //选择单人模式

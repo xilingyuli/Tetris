@@ -1,7 +1,6 @@
-package ¶íÂŞË¹·½¿é;
+package Tetris;
 
 import java.awt.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

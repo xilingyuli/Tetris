@@ -1,4 +1,4 @@
-package ¶íÂÞË¹·½¿é;
+package Tetris;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

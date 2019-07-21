@@ -1,5 +1,7 @@
-package 俄罗斯方块;
+package Tetris;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +9,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.net.URI;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,9 +34,14 @@ public class GameFrame extends JFrame{
 	
 	private int speed;
 	private boolean isPaused;
-	
+	File f;
+	URI uri;
+	URL url;
+
+
 	GameFrame()
 	throws Exception{
+
 		super();
 		this.setLayout(new FlowLayout());
 		game = new GameView(15,10);
@@ -103,7 +113,7 @@ public class GameFrame extends JFrame{
 	//游戏结束
 	protected void stopGame()
 		throws Exception{
-		JOptionPane.showMessageDialog(null, "你的最终得分是："+watch.score, "俄罗斯方块", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "你的最终得分是："+watch.score, "Tetris", JOptionPane.ERROR_MESSAGE);
 		String inputval = JOptionPane.showInputDialog("请输入你的昵称:");
 		GameFrame.StoreData(inputval,watch.score);
 		this.setVisible(false);

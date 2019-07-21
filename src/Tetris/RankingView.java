@@ -1,13 +1,10 @@
-package ¶íÂÞË¹·½¿é;
+package Tetris;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.*;
-import java.util.Collections;
 
 public class RankingView extends JFrame{
 

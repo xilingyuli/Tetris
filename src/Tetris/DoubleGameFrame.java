@@ -1,4 +1,4 @@
-package 俄罗斯方块;
+package Tetris;
 
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -232,7 +232,7 @@ public class DoubleGameFrame extends GameFrame{
 	@Override
 	protected void stopGame()
 	{
-		JOptionPane.showMessageDialog(null, "你输了", "俄罗斯方块", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "你输了", "Tetris", JOptionPane.ERROR_MESSAGE);
 		receiveThread.interrupt();
 		sendThread.interrupt();
 		try {
@@ -247,7 +247,7 @@ public class DoubleGameFrame extends GameFrame{
 	//赢得游戏，弹出提示框，释放资源
 	protected void winGame()
 	{
-		JOptionPane.showMessageDialog(null, "你赢了，当前分数是"+watch.score, "俄罗斯方块", JOptionPane.OK_OPTION);
+		JOptionPane.showMessageDialog(null, "你赢了，当前分数是"+watch.score, "Tetris", JOptionPane.OK_OPTION);
 		game.endGame();
 		sendThread.interrupt();
 		receiveThread.interrupt();
