@@ -6,10 +6,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.*;
 
-public class RankingView extends JFrame{
+public class RankingView {
 
     RankingView()throws Exception{
         // 创建内容面板，使用边界布局
+        JFrame jf = new JFrame();
         JPanel panel = new JPanel(new BorderLayout());
 
         //数据库加载驱动和连接
@@ -39,29 +40,40 @@ public class RankingView extends JFrame{
             i++;
         }
 
+        jf.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    jf.setVisible(false);
+                    Main.main(null);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+
+        });
 //        JFrame jf = new JFrame("测试窗口");
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JTable table = new JTable(rowData, columnNames);
         // 把 表头 添加到容器顶部（使用普通的中间容器添加表格时，表头 和 内容 需要分开添加）
         panel.add(table.getTableHeader(), BorderLayout.NORTH);
         // 把 表格内容 添加到容器中心
         panel.add(table, BorderLayout.CENTER);
         table.setFont(new Font("宋体",Font.CENTER_BASELINE,15));
-        this.setContentPane(panel);
-        this.pack();
-        this.setLocationRelativeTo(null);
-        this.setSize(1024,768);
+        jf.setContentPane(panel);
+        jf.pack();
+        jf.setLocationRelativeTo(null);
+        jf.setSize(1024,768);
         table.setSize(960,640);
         panel.setSize(960,640);
-        this.setSize(1024,768);
+        jf.setSize(1024,768);
         JButton jb = new JButton("back");
-//        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                JOptionPane.showMessageDialog(null,"请重新进入本系统");
-            }
-        });
+        jf.setVisible(true);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     //连接数据库的方法

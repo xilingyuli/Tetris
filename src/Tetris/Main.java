@@ -26,11 +26,7 @@ public class Main {
 	 * 
 	 */
 	public static void main(String[] args) throws SQLException,ClassNotFoundException {
-		// TODO Auto-generated method stub
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
+
 				Object[] options ={ "单人", "双人","排行榜"};
 				int m = JOptionPane.showOptionDialog(null, "请选择游戏模式", "Tetris",JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "单人");
 				if(m==0)
@@ -56,21 +52,21 @@ public class Main {
 					}
                 }
 
-			}
-			private void singleGame() throws Exception{  //构造单人游戏界面面板
-				GameFrame player = new GameFrame();
-				player.setVisible(true);
-			}
-			private void doubleGame() throws Exception{ //构造双人游戏界面面板
-				DoubleGameFrame player1 = new DoubleGameFrame("192.168.17.185",5000,4000);
-				player1.setVisible(true);
-			}
 
-			private void Ranking()throws Exception{  //构造排行面板
-				RankingView rank = new RankingView();
-				rank.setVisible(true);
-            }
-		});
+
+
+	}
+	private static void singleGame() throws Exception{  //构造单人游戏界面面板
+		GameFrame player = new GameFrame();
+		player.setVisible(true);
+	}
+	private static void doubleGame() throws Exception{ //构造双人游戏界面面板
+		DoubleGameFrame player1 = new DoubleGameFrame("192.168.17.185",5000,4000);
+		player1.setVisible(true);
 	}
 
+	private static void Ranking()throws Exception{  //构造排行面板
+		RankingView rank = new RankingView();
+
+	}
 }

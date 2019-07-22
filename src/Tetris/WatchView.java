@@ -79,7 +79,6 @@ public class WatchView extends JPanel{
 	{
 		pause.addMouseListener(l);
 	}
-	
 	//更新面板上的分数信息
 	public void updateData(int c,Unit p)
 	{
