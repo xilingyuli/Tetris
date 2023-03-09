@@ -1,16 +1,12 @@
-package 俄罗斯方块;
+package Tetris;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Point;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class GameView extends JPanel{
 	
@@ -24,6 +20,8 @@ public class GameView extends JPanel{
 	GameView(int x,int y)
 	{
 		 super();
+
+		 this.setBackground(Color.yellow);
 		 this.setLayout(new GridLayout(x,y));
 		 box = new JLabel[x][y];
 		 for(int i=0;i<x;i++)
@@ -36,7 +34,8 @@ public class GameView extends JPanel{
 			 }
 		 nextUnit = new LinkedList<Unit>();
 	}
-	
+
+
 	//返回消去的行数
 	public int removeRow()
 	{

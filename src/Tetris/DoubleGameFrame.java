@@ -1,4 +1,4 @@
-package 俄罗斯方块;
+package Tetris;
 
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -34,7 +34,7 @@ public class DoubleGameFrame extends GameFrame{
 	OutputStream out;
 	Robot robot;
 	DoubleGameFrame(String ip,int sp,int rp)
-	{
+	throws Exception{
 		super();
 		sendIP = ip;
 		sendPort = sp;
@@ -188,7 +188,12 @@ public class DoubleGameFrame extends GameFrame{
 	@Override
 	protected int updateData()
 	{
-		int i = super.updateData();
+		int i = 0;
+		try {
+			i = super.updateData();
+		}catch (Exception e1){
+			e1.printStackTrace();
+		}
 		if(i>1)
 			try {
 				out.write(i-1);
@@ -202,7 +207,11 @@ public class DoubleGameFrame extends GameFrame{
 	@Override
 	protected void resetGame()
 	{
-		super.resetGame();
+		try {
+			super.resetGame();
+		}catch (Exception e1){
+			e1.printStackTrace();
+		}
 		this.sendThread.start();
 		this.receiveThread.start();
 		this.sendDataThread.start();
@@ -223,7 +232,7 @@ public class DoubleGameFrame extends GameFrame{
 	@Override
 	protected void stopGame()
 	{
-		JOptionPane.showMessageDialog(null, "你输了", "俄罗斯方块", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "你输了", "Tetris", JOptionPane.ERROR_MESSAGE);
 		receiveThread.interrupt();
 		sendThread.interrupt();
 		try {
@@ -238,7 +247,7 @@ public class DoubleGameFrame extends GameFrame{
 	//赢得游戏，弹出提示框，释放资源
 	protected void winGame()
 	{
-		JOptionPane.showMessageDialog(null, "你赢了，当前分数是"+watch.score, "俄罗斯方块", JOptionPane.OK_OPTION);
+		JOptionPane.showMessageDialog(null, "你赢了，当前分数是"+watch.score, "Tetris", JOptionPane.OK_OPTION);
 		game.endGame();
 		sendThread.interrupt();
 		receiveThread.interrupt();

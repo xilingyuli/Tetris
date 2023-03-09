@@ -1,4 +1,4 @@
-package 俄罗斯方块;
+package Tetris;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,7 +21,7 @@ public class WatchView extends JPanel{
 	private JButton start,pause;
 	private JLabel[][] nextUnit;
 	private JPanel nextUnitPanel;
-	private JLabel s,l;
+	private JLabel s,l,tips;  //分数、关卡和下一个块的形状
 	private FlowLayout layout;
 	
 	public int level,score;
@@ -32,6 +32,8 @@ public class WatchView extends JPanel{
 		pause = new JButton("暂停");
 		s = new JLabel("分数:0",JLabel.CENTER);
 		l = new JLabel("关卡:1",JLabel.CENTER);
+		tips = new JLabel("新块形状",JLabel.CENTER);
+		tips.setPreferredSize(new Dimension(100,50));
 		s.setPreferredSize(new Dimension(100,50));
 		l.setPreferredSize(new Dimension(100,50));
 		resetData();
@@ -42,13 +44,14 @@ public class WatchView extends JPanel{
 			{
 				nextUnit[i][j] = new JLabel();
 				nextUnit[i][j].setPreferredSize(new Dimension(20,20));
-				nextUnit[i][j].setBackground(Color.YELLOW);
+				nextUnit[i][j].setBackground(Color.RED);
 				nextUnitPanel.add(nextUnit[i][j]);
 			}
 		
 		layout = new FlowLayout();
 		layout.setVgap(30);
 		this.setLayout(layout);
+		this.add(tips);
 		this.add(nextUnitPanel);
 		this.add(l);
 		this.add(s);
@@ -76,7 +79,6 @@ public class WatchView extends JPanel{
 	{
 		pause.addMouseListener(l);
 	}
-	
 	//更新面板上的分数信息
 	public void updateData(int c,Unit p)
 	{

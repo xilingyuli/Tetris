@@ -1,12 +1,16 @@
-package 俄罗斯方块;
+package Tetris;
 
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.applet.Applet;
+import java.applet.AudioClip;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+import java.net.URI;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -25,25 +29,39 @@ public class GameFrame extends JFrame{
 	
 	private int speed;
 	private boolean isPaused;
-	
+	File f;
+	URI uri;
+	URL url;
+
+
 	GameFrame()
-	{
+	throws Exception{
+
 		super();
 		this.setLayout(new FlowLayout());
 		game = new GameView(15,10);
 		watch = new WatchView();
+		this.setBackground(Color.yellow);
 		this.add(game);
 		this.add(watch);
 		this.pack();
+		this.addWindowListener(new WindowAdapter() {
+		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		downMoveTimer = new Timer(1000,new ActionListener()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e){
 				// TODO Auto-generated method stub
 				if(!game.moveUnit(3))
-					updateData();
+				{
+					try {
+						updateData();
+					}catch (Exception e1){
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 		addListener();
@@ -52,7 +70,7 @@ public class GameFrame extends JFrame{
 	
 	//重新开始新游戏
 	protected void resetGame()
-	{
+	throws Exception{
 		isPaused = false;
 		game.resetGame();
 		watch.resetData();
@@ -61,7 +79,7 @@ public class GameFrame extends JFrame{
 	
 	//方块落到底部时触发，更新各种数据，并创造新方块落下
 	protected int updateData()
-	{
+	throws Exception{
 		int c = game.removeRow();
 		watch.updateData(c, game.creatNextUnit());
 		speed = (int) (1000*Math.pow(0.75, watch.getLevel()-1));
@@ -81,7 +99,7 @@ public class GameFrame extends JFrame{
 	
 	//恢复游戏或开始新游戏
 	protected void restartGame()
-	{
+			throws Exception{
 		if(!isPaused)
 			resetGame();
 		else
@@ -91,9 +109,46 @@ public class GameFrame extends JFrame{
 	
 	//游戏结束
 	protected void stopGame()
-	{
-		JOptionPane.showMessageDialog(null, "你的最终得分是："+watch.score, "俄罗斯方块", JOptionPane.ERROR_MESSAGE);
+		throws Exception{
+		JOptionPane.showMessageDialog(null, "你的最终得分是："+watch.score, "Tetris", JOptionPane.ERROR_MESSAGE);
+		String inputval = JOptionPane.showInputDialog("请输入你的昵称:");
+		GameFrame.StoreData(inputval,watch.score);
+		this.setVisible(false);
+		String a[] = null;
+		Main.main(a);
 	}
+
+	//连接数据库的方法
+	public static Connection getCon() throws ClassNotFoundException, SQLException {
+		//建立一个空连接
+		Connection con = null;
+		//通过class名找到驱动类
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		//通过驱动类建立连接并给con对象赋值
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dong1?useSSL=false&serverTimezone=UTC","root","dby19991016");
+
+		return con;
+
+	}
+
+	//数据存储
+	protected static void StoreData(String inputval,int Score) throws SQLException,ClassNotFoundException{
+		//调用getcon()与数据库建立连接
+		Connection connection = getCon();
+		//写sql语句 ?占位符
+		String sql = "insert into dongdong values(null,?,?)";
+
+		//预处理
+		PreparedStatement ps = connection.prepareStatement(sql);
+		//改变占位符的值
+		ps.setString(1,inputval);
+		ps.setInt(2,Score);
+
+		//执行
+		ps.executeUpdate();
+	}
+
 	private void addListener()
 	{
 		watch.addStartListener(
@@ -101,9 +156,13 @@ public class GameFrame extends JFrame{
 		{
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e){
+				try {
+					restartGame();
+				}catch (Exception e1){
+					e1.printStackTrace();
+				}
 				// TODO Auto-generated method stub
-				restartGame();
 			}
 
 			@Override
